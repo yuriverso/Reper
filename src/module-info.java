@@ -6,4 +6,5 @@
  *
  */
 module Reper {
+	requires java.desktop;
 }
