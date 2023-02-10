@@ -13,17 +13,17 @@ import javax.swing.JPanel;
 
 public class SongPanel extends JPanel implements ActionListener{
 
-	private final int WIDTH = 370, HEIGHT = 50;
+	private final int WIDTH = 370, HEIGHT = 45;
 	
 	MasterPanel masterPanel;
 	
 	// Attributes
 	private int id;
 	private String name, artist, tone;
-	private double length;
+	private int length;
 
 	// Components
-	JLabel nameLabel, artistLabel, toneLabel, lengthLabel;
+	JLabel idLabel, nameLabel, artistLabel, toneLabel, lengthLabel;
 	ReperButton addButton, removeButton;
 	
 	SongPanel(String function, MasterPanel masterPanel){
@@ -37,53 +37,57 @@ public class SongPanel extends JPanel implements ActionListener{
 	}
 	
 	public void addComponents(String function) {
-		Font font = new Font("Arial", Font.PLAIN, 5);
 		if(function.equals("add")) {
-			addButton = new ReperButton(5, 10, 30, 30, masterPanel.al);
-			addButton.setFont(font);
-			addButton.setText(String.valueOf(id));
+			addButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
 			addButton.setBackground(Color.green);
 			addButton.setOpaque(true);
 			addButton.addActionListener(this);
 			add(addButton);
 		}else if(function.equals("remove")) {
-			removeButton = new ReperButton(5, 10, 30, 30, masterPanel.al);
-			removeButton.setText(String.valueOf(id));
+			removeButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
 			removeButton.setBackground(Color.red);
 			removeButton.setOpaque(true);
 			removeButton.addActionListener(this);
 			add(removeButton);
 		}
+		idLabel = new JLabel();
+		idLabel.setText(String.valueOf(id));
+		idLabel.setHorizontalAlignment(JLabel.CENTER);
+		idLabel.setBounds(30, 0, 30, 45);
+		idLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+		add(idLabel);
+		
 		nameLabel = new JLabel();
 		nameLabel.setText(name);
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
-		nameLabel.setBounds(40, 0, 120, 50);
+		nameLabel.setBounds(60, 0, 120, 45);
 		nameLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(nameLabel);
 		
 		artistLabel = new JLabel();
 		artistLabel.setText(artist);
 		artistLabel.setHorizontalAlignment(JLabel.CENTER);
-		artistLabel.setBounds(160, 0, 115, 50);
+		artistLabel.setBounds(180, 0, 100, 45);
 		artistLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(artistLabel);
 		
 		toneLabel = new JLabel();
 		toneLabel.setText(tone);
 		toneLabel.setHorizontalAlignment(JLabel.CENTER);
-		toneLabel.setBounds(275, 0, 50, 50);
+		toneLabel.setBounds(280, 0, 30, 45);
 		toneLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(toneLabel);
 		
 		lengthLabel = new JLabel();
 		lengthLabel.setText(String.valueOf(length));
 		lengthLabel.setHorizontalAlignment(JLabel.CENTER);
-		lengthLabel.setBounds(325, 0, 50, 50);
+		lengthLabel.setBounds(310, 0, 65, 45);
 		lengthLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(lengthLabel);
 	}
 	
 	public void updateData() {
+		idLabel.setText(String.valueOf(id));
 		nameLabel.setText(name);
 		artistLabel.setText(artist);
 		toneLabel.setText(tone);
@@ -130,11 +134,11 @@ public class SongPanel extends JPanel implements ActionListener{
 		this.tone = tone;
 	}
 
-	public double getLength() {
+	public int getLength() {
 		return length;
 	}
 
-	public void setLength(double length) {
+	public void setLength(int length) {
 		this.length = length;
 	}
 

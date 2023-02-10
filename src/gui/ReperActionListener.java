@@ -24,16 +24,27 @@ public class ReperActionListener implements ActionListener{
 		if (e.getSource() == masterPanel.refreshButton) {
 			System.out.println("refresh");
 			masterPanel.reperPanel.fillScrollPanel();
-			masterPanel.reperPanel.scrollPane.revalidate();
+			masterPanel.messageLabel.setForeground(Color.black);
+			masterPanel.messageLabel.setText("Lista atualizada!");
 		}
 		if (e.getSource() == masterPanel.addSongButton) {
 			System.out.println("add song");
+			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.addSongPanel.setVisible(true);
+			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.editSongButton) {
 			System.out.println("edit song");
+			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.editSongPanel.setVisible(true);
+			masterPanel.disableComponents();
+			
 		}
 		if (e.getSource() == masterPanel.removeSongButton) {
 			System.out.println("remove song");
+			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.removeSongPanel.setVisible(true);
+			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.openSetButton) {
 			System.out.println("open set");
@@ -68,6 +79,44 @@ public class ReperActionListener implements ActionListener{
 			
 		}
 		
+		// AddSongPanel buttons
+		if(e.getSource() == masterPanel.addSongPanel.addButton) {
+			masterPanel.addSongPanel.addSong();
+			masterPanel.reperPanel.fillScrollPanel();
+			masterPanel.addSongPanel.clearFields();
+		}
+		if(e.getSource() == masterPanel.addSongPanel.closeButton) {
+			System.out.println("cancel button");
+			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.addSongPanel.setVisible(false);
+			masterPanel.enableComponents();
+		}
+		
+		// EditSongPanel buttons
+		if(e.getSource() == masterPanel.editSongPanel.editButton) {
+			masterPanel.editSongPanel.editSong();
+			masterPanel.reperPanel.fillScrollPanel();
+			masterPanel.editSongPanel.clearFields();
+		}
+		if(e.getSource() == masterPanel.editSongPanel.closeButton) {
+			System.out.println("cancel button");
+			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.editSongPanel.setVisible(false);
+			masterPanel.enableComponents();
+		}
+		
+		// DeleteSongPanel buttons
+		if(e.getSource() == masterPanel.removeSongPanel.removeButton) {
+			masterPanel.removeSongPanel.removeSong();
+			masterPanel.reperPanel.fillScrollPanel();
+			masterPanel.removeSongPanel.idTextField.setText("");
+		}
+		if(e.getSource() == masterPanel.removeSongPanel.closeButton) {
+			System.out.println("cancel button");
+			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.removeSongPanel.setVisible(false);
+			masterPanel.enableComponents();
+		}
 	}
 
 }

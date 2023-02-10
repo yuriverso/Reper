@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 
 import jdbc.ReperConnection;
 import jdbc.ReperJDBC;
+import jdbc.Song;
 
 public class MasterPanel extends JPanel{
 	
@@ -21,6 +23,9 @@ public class MasterPanel extends JPanel{
 
 	// Sprouting panels
 	ConnectionPanel	connectionPanel;
+	AddSongPanel addSongPanel;
+	EditSongPanel editSongPanel;
+	RemoveSongPanel removeSongPanel;
 	
 	// Components
 	ReperActionListener al = new ReperActionListener(this);
@@ -32,7 +37,7 @@ public class MasterPanel extends JPanel{
 				reorderUpButton, reorderDownButton;
 	
 	
-	MasterPanel(){
+	public MasterPanel(){
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(null);
 		setBackground(Color.decode("#b02c3a"));
@@ -47,6 +52,9 @@ public class MasterPanel extends JPanel{
 		
 		// Sprouting Panels
 		connectionPanel = new ConnectionPanel(this);
+		addSongPanel = new AddSongPanel(this);
+		editSongPanel = new EditSongPanel(this);
+		removeSongPanel = new RemoveSongPanel(this);
 		
 		// Buttons
 		dbConnectionButton = new ReperButton(30, 30, 50, 30, al);
@@ -104,24 +112,18 @@ public class MasterPanel extends JPanel{
 		for(Component c : getComponents()) {
 			c.setEnabled(true);
 		}
-		for(Component c : setPanel.getComponents()) {
-			c.setEnabled(true);
-		}
-		for(Component c : reperPanel.getComponents()) {
-			c.setEnabled(true);
-		}
+		reperPanel.setVisible(true);
+		setPanel.setVisible(true);
 	}
 	
 	public void disableComponents() {
 		for(Component c : getComponents()) {
-			c.setEnabled(false);
+			if(c != messageLabel) {
+				c.setEnabled(false);
+			}
 		}
-		for(Component c : setPanel.getComponents()) {
-			c.setEnabled(false);
-		}
-		for(Component c : reperPanel.getComponents()) {
-			c.setEnabled(false);
-		}
+		reperPanel.setVisible(false);
+		setPanel.setVisible(false);
 	}
 	
 	public void updateConnectionMessageAndLabel(int status) {
@@ -164,5 +166,6 @@ public class MasterPanel extends JPanel{
 	public void setJdbc(ReperJDBC jdbc) {
 		this.jdbc = jdbc;
 	}
+	
 	
 }

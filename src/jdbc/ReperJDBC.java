@@ -15,6 +15,31 @@ public class ReperJDBC {
 		this.con = con;
 	}
 	
+	public void removeSong(int id) {
+		String sql = String.format("DELETE FROM all_songs WHERE id = %d;", id);
+		try {
+			con.createStatement().execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void editSong(Song song) {
+		int id = song.getId();
+		String name = song.getName();
+		String artist = song.getArtist();
+		String tone = song.getTone();
+		int length = song.getLength();
+		String sql = String.format("UPDATE all_songs SET nome = '%s', artista = '%s', tom = '%s', duracao = '%d' WHERE id = '%d'",
+									name, artist, tone, length, id);
+		System.out.println(sql);
+		try {
+			con.createStatement().execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void insertSong(Song song) {
 		String sql = "INSERT INTO all_songs(nome, artista, tom, duracao) VALUES (?,?,?,?);";
 		PreparedStatement ps;

@@ -16,7 +16,7 @@ public class ConnectionPanel extends JPanel{
 	
 	ConnectionPanel(MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
-		setBounds(100,100,400,200);
+		setBounds(250,100,400,200);
 		setBackground(Color.decode("#b02c3a"));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);

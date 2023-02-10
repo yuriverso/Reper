@@ -1,26 +1,22 @@
 package main;
 
-import java.awt.Color;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import javax.swing.JFrame;
 
-import gui.ReperFrame;
-import jdbc.ReperConnection;
-import jdbc.ReperJDBC;
-import jdbc.Song;
+import gui.MasterPanel;
 
 public class Reper {
 	
 	public static void main(String[] args) {
-		/*ReperConnection con = new ReperConnection();
-		ReperJDBC jdbc = new ReperJDBC(con.openCon());
-		ReperFrame frame = new ReperFrame(jdbc);
-		if(jdbc.getCon() == null) {
-			frame.masterPanel.connectionLabel.setBackground(Color.red);
-			frame.masterPanel.messageLabel.setForeground(Color.red);
-			frame.masterPanel.messageLabel.setText("Erro de conexão com o DB");
-		}*/
-		ReperFrame frame = new ReperFrame(null);
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		
+		MasterPanel masterPanel = new MasterPanel();
+		frame.add(masterPanel);
+		
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 		
 	}
 		

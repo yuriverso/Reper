@@ -37,6 +37,7 @@ public class SetPanel extends JPanel{
 	public void updateSongs() {
 		scrollPanel.removeAll();
 		scrollPanel.revalidate();
+		scrollPanel.repaint();
 		for(SongPanel s : songPanels) {
 			scrollPanel.add(s);
 		}
