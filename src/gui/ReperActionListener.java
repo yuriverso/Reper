@@ -23,6 +23,8 @@ public class ReperActionListener implements ActionListener{
 		}
 		if (e.getSource() == masterPanel.refreshButton) {
 			System.out.println("refresh");
+			masterPanel.reperPanel.fillScrollPanel();
+			masterPanel.reperPanel.scrollPane.revalidate();
 		}
 		if (e.getSource() == masterPanel.addSongButton) {
 			System.out.println("add song");
@@ -50,11 +52,20 @@ public class ReperActionListener implements ActionListener{
 		}
 		
 		// ConnectionPanel buttons
-		if(e.getSource() == masterPanel.connectionPanel.cancelButton) {
+		if(e.getSource() == masterPanel.connectionPanel.closeButton) {
 			System.out.println("cancel button");
 			masterPanel.setBackground(Color.decode("#b02c3a"));
 			masterPanel.connectionPanel.setVisible(false);
 			masterPanel.enableComponents();
+		}
+		
+		if(e.getSource() == masterPanel.connectionPanel.connectButton) {
+			System.out.println("connect button");
+			String url = masterPanel.connectionPanel.urlTextField.getText(); 
+			String user = masterPanel.connectionPanel.userTextField.getText();
+			String pass = masterPanel.connectionPanel.passTextField.getText();
+			masterPanel.newConnection(url, user, pass);
+			
 		}
 		
 	}

@@ -8,16 +8,25 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import jdbc.ReperConnection;
+import jdbc.ReperJDBC;
+
 public class MasterPanel extends JPanel{
 	
 	private final int WIDTH = 900, HEIGHT = 600;
 	
+	// Java Database Connection
+	private ReperConnection reperConnection;
+	ReperJDBC jdbc = new ReperJDBC(null);
+
+	// Sprouting panels
+	ConnectionPanel	connectionPanel;
+	
 	// Components
-	ReperActionListener al;
-	ConnectionPanel connectionPanel;
+	ReperActionListener al = new ReperActionListener(this);
 	ReperPanel reperPanel;
 	SetPanel setPanel;
-	JLabel connectionLabel, messageLabel;
+	public JLabel connectionLabel, messageLabel;
 	ReperButton dbConnectionButton, refreshButton, addSongButton, editSongButton, 
 				removeSongButton, openSetButton, saveSetButton, exportButton, 
 				reorderUpButton, reorderDownButton;
@@ -28,14 +37,15 @@ public class MasterPanel extends JPanel{
 		setLayout(null);
 		setBackground(Color.decode("#b02c3a"));
 		
+		//addConnectionComponents();
+		connectToDB();
 		addComponents();
+				
 	}
 	
 	private void addComponents() {
-		// Action listener
-		al = new ReperActionListener(this);
 		
-		// Sprouting panels
+		// Sprouting Panels
 		connectionPanel = new ConnectionPanel(this);
 		
 		// Buttons
@@ -60,7 +70,7 @@ public class MasterPanel extends JPanel{
 		reorderDownButton = new ReperButton(865, 325, 30, 200, al);
 		add(reorderDownButton);
 		
-		// Connecion Label
+		// Connection Label
 		connectionLabel = new JLabel();
 		connectionLabel.setText(null);
 		connectionLabel.setBackground(Color.green);
@@ -68,7 +78,7 @@ public class MasterPanel extends JPanel{
 		connectionLabel.setBounds(100, 30, 50, 30);
 		connectionLabel.setOpaque(true);
 		add(connectionLabel);
-		
+						
 		// Message display label
 		messageLabel = new JLabel("Welcome!");
 		messageLabel.setForeground(Color.black);
@@ -85,8 +95,10 @@ public class MasterPanel extends JPanel{
 		//
 		add(reperPanel);
 		add(setPanel);
-		//setPanel.addTest();
+
+		setReturnComponents(reperConnection.getUrl(), reperConnection.getUser(), reperConnection.getPass());
 	}
+	
 
 	public void enableComponents() {
 		for(Component c : getComponents()) {
@@ -110,6 +122,47 @@ public class MasterPanel extends JPanel{
 		for(Component c : reperPanel.getComponents()) {
 			c.setEnabled(false);
 		}
+	}
+	
+	public void updateConnectionMessageAndLabel(int status) {
+		if(status == 0) {
+			connectionLabel.setBackground(Color.green);
+			messageLabel.setForeground(Color.green);
+			messageLabel.setText("Conexão bem sucedida");
+		}else if(status == 1) {
+			connectionLabel.setBackground(Color.red);
+			messageLabel.setForeground(Color.red);
+			messageLabel.setText("Erro de conexão com o DB");
+		}
+		
+	}
+	public void setReturnComponents(String url, String user, String pass) {
+		connectionPanel.urlTextField.setText(url);
+		connectionPanel.userTextField.setText(user);
+		connectionPanel.passTextField.setText(pass);
+		
+		if(jdbc.getCon() != null) updateConnectionMessageAndLabel(0);
+		else if(jdbc.getCon() == null) updateConnectionMessageAndLabel(1);
+	}
+	
+	public void connectToDB() {
+		reperConnection = new ReperConnection();
+		jdbc = new ReperJDBC(reperConnection.openCon());
+	}
+	
+	public void newConnection(String url, String user, String pass) {
+		reperConnection = new ReperConnection();
+		jdbc = new ReperJDBC(reperConnection.openCon(url, user, pass));
+		
+		setReturnComponents(url, user, pass);
+	}
+	
+	public ReperJDBC getJdbc() {
+		return jdbc;
+	}
+
+	public void setJdbc(ReperJDBC jdbc) {
+		this.jdbc = jdbc;
 	}
 	
 }

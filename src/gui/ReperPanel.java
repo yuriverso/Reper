@@ -3,12 +3,15 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import jdbc.Song;
 
 public class ReperPanel extends JPanel{
 	
@@ -19,8 +22,6 @@ public class ReperPanel extends JPanel{
 	JScrollPane scrollPane;
 	JPanel scrollPanel;
 	
-	SongPanel song1, song2, song3;
-	//SongPanel[] songPanels;
 	ArrayList<SongPanel> songPanels;
 	
 	ReperPanel(MasterPanel masterPanel){
@@ -29,28 +30,38 @@ public class ReperPanel extends JPanel{
 		setBackground(Color.black);
 		setLayout(null);
 		
-		//get number of songs
-		//initialize songPanels with the number of songs []
-		//add songs to scroll pane
-		songPanels = new ArrayList<SongPanel>();
-		//songPanels = new SongPanel[3];
 		
+		songPanels = new ArrayList<SongPanel>();
 		addComponents();
+
 		fillScrollPanel();
 	}
 	
 	public void fillScrollPanel() {
-		
-		song1 = new SongPanel("add", masterPanel);
-		song2 = new SongPanel("add", masterPanel);
-		song3 = new SongPanel("add", masterPanel);
-		
-		songPanels.add(song1);
-		songPanels.add(song2);
-		songPanels.add(song3);
-		for(SongPanel s : songPanels) {
-			scrollPanel.add(s);
+		if(masterPanel.jdbc.getCon() != null) {
+			try {
+				ArrayList<Song> songs;
+				songs = masterPanel.jdbc.getAllSongs();
+				for(Song song : songs) {
+					SongPanel songPanel = new SongPanel("add", masterPanel);
+					songPanel.setId(song.getId());
+					songPanel.setName(song.getName());
+					songPanel.setArtist(song.getArtist());
+					songPanel.setTone(song.getTone());
+					songPanel.setLength(song.getLength());
+					songPanel.updateData();
+					songPanels.add(songPanel);
+				}
+				for(SongPanel s : songPanels) {
+					scrollPanel.add(s);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+				masterPanel.messageLabel.setForeground(Color.red);
+				masterPanel.messageLabel.setText("Erro ao obter músicas");
+			}
 		}
+		
 	}
 	
 	

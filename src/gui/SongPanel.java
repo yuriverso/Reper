@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ public class SongPanel extends JPanel implements ActionListener{
 	MasterPanel masterPanel;
 	
 	// Attributes
+	private int id;
 	private String name, artist, tone;
 	private double length;
 
@@ -35,14 +37,18 @@ public class SongPanel extends JPanel implements ActionListener{
 	}
 	
 	public void addComponents(String function) {
+		Font font = new Font("Arial", Font.PLAIN, 5);
 		if(function.equals("add")) {
 			addButton = new ReperButton(5, 10, 30, 30, masterPanel.al);
+			addButton.setFont(font);
+			addButton.setText(String.valueOf(id));
 			addButton.setBackground(Color.green);
 			addButton.setOpaque(true);
 			addButton.addActionListener(this);
 			add(addButton);
 		}else if(function.equals("remove")) {
 			removeButton = new ReperButton(5, 10, 30, 30, masterPanel.al);
+			removeButton.setText(String.valueOf(id));
 			removeButton.setBackground(Color.red);
 			removeButton.setOpaque(true);
 			removeButton.addActionListener(this);
@@ -75,6 +81,13 @@ public class SongPanel extends JPanel implements ActionListener{
 		lengthLabel.setBounds(325, 0, 50, 50);
 		lengthLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(lengthLabel);
+	}
+	
+	public void updateData() {
+		nameLabel.setText(name);
+		artistLabel.setText(artist);
+		toneLabel.setText(tone);
+		lengthLabel.setText(String.valueOf(length));
 	}
 
 	@Override
@@ -123,6 +136,14 @@ public class SongPanel extends JPanel implements ActionListener{
 
 	public void setLength(double length) {
 		this.length = length;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
