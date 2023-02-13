@@ -19,7 +19,7 @@ public class AddSongPanel extends JPanel{
 	AddSongPanel(MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
 		setBounds(250,100,400,280);
-		setBackground(Color.decode("#b02c3a"));
+		setBackground(Color.gray);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
 		setVisible(false);
@@ -34,30 +34,30 @@ public class AddSongPanel extends JPanel{
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setBounds(130, 15, 140, 30);
 		titleLabel.setForeground(Color.black);
-		titleLabel.setBackground(Color.gray);
+		titleLabel.setBackground(Color.white);
 		titleLabel.setOpaque(true);
 		titleLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(titleLabel);
 		
-		nameLabel = new JLabel("Name");
+		nameLabel = new JLabel("Nome");
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		nameLabel.setBounds(20, 60, 50, 20);
 		nameLabel.setForeground(Color.black);
 		add(nameLabel);
 		
-		artistLabel = new JLabel("Artist");
+		artistLabel = new JLabel("Artista");
 		artistLabel.setHorizontalAlignment(JLabel.CENTER);
 		artistLabel.setBounds(20, 100, 50, 20);
 		artistLabel.setForeground(Color.black);
 		add(artistLabel);
 		
-		toneLabel = new JLabel("Tone");
+		toneLabel = new JLabel("Tom");
 		toneLabel.setHorizontalAlignment(JLabel.CENTER);
 		toneLabel.setBounds(20, 140, 50, 20);
 		toneLabel.setForeground(Color.black);
 		add(toneLabel);
 		
-		lengthLabel = new JLabel("Length");
+		lengthLabel = new JLabel("Duração");
 		lengthLabel.setHorizontalAlignment(JLabel.CENTER);
 		lengthLabel.setBounds(20, 180, 50, 20);
 		lengthLabel.setForeground(Color.black);
@@ -80,11 +80,11 @@ public class AddSongPanel extends JPanel{
 		add(lengthTextField);
 		
 		addButton = new ReperButton(80, 220, 140, 40, masterPanel.al);
-		addButton.setText("Add");
+		addButton.setText("Adicionar");
 		add(addButton);
 		
 		closeButton = new ReperButton(240, 220, 140, 40, masterPanel.al);
-		closeButton.setText("Close");
+		closeButton.setText("Fechar");
 		add(closeButton);
 	}
 	

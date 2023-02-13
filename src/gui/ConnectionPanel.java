@@ -17,7 +17,7 @@ public class ConnectionPanel extends JPanel{
 	ConnectionPanel(MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
 		setBounds(250,100,400,200);
-		setBackground(Color.decode("#b02c3a"));
+		setBackground(Color.gray);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
 		setVisible(false);
@@ -59,11 +59,11 @@ public class ConnectionPanel extends JPanel{
 		add(passTextField);
 		
 		connectButton = new ReperButton(80, 140, 140, 40, masterPanel.al);
-		connectButton.setText("Connect");
+		connectButton.setText("Conectar");
 		add(connectButton);
 		
 		closeButton = new ReperButton(240, 140, 140, 40, masterPanel.al);
-		closeButton.setText("Close");
+		closeButton.setText("Fechar");
 		add(closeButton);
 	}
 

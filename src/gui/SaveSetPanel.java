@@ -16,7 +16,7 @@ public class SaveSetPanel extends JPanel{
 	SaveSetPanel(MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
 		setBounds(250,200,400,180);
-		setBackground(Color.decode("#b02c3a"));
+		setBackground(Color.gray);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
 		setVisible(false);
@@ -31,7 +31,7 @@ public class SaveSetPanel extends JPanel{
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setBounds(130, 15, 140, 30);
 		titleLabel.setForeground(Color.black);
-		titleLabel.setBackground(Color.gray);
+		titleLabel.setBackground(Color.white);
 		titleLabel.setOpaque(true);
 		titleLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(titleLabel);

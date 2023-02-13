@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -44,7 +45,7 @@ public class MasterPanel extends JPanel{
 	public MasterPanel(){
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(null);
-		setBackground(Color.decode("#b02c3a"));
+		setBackground(Color.gray);
 		
 		//addConnectionComponents();
 		connectToDB();
@@ -65,27 +66,43 @@ public class MasterPanel extends JPanel{
 		exportSetPanel = new ExportSetPanel(this);
 		
 		// Buttons
-		dbConnectionButton = new ReperButton(30, 30, 50, 30, al);
+		dbConnectionButton = new ReperButton(30, 30, 70, 30, al);
+		dbConnectionButton.setMargin(new Insets(0, 0, 0, 0));
+		dbConnectionButton.setText("Conexão");
 		add(dbConnectionButton);
-		refreshButton = new ReperButton(170, 30, 50, 30, al);
+		refreshButton = new ReperButton(210, 30, 70, 30, al);
+		refreshButton.setMargin(new Insets(0, 0, 0, 0));
+		refreshButton.setText("Atualizar");
 		add(refreshButton);
 		addSongButton = new ReperButton(35, 550, 130, 30, al);
+		addSongButton.setText("Adicionar");
 		add(addSongButton);
 		editSongButton = new ReperButton(165, 550, 130, 30, al);
+		editSongButton.setText("Editar");
 		add(editSongButton);
 		removeSongButton = new ReperButton(295, 550, 130, 30, al);
+		removeSongButton.setText("Remover");
 		add(removeSongButton);
 		openSetButton = new ReperButton(475, 550, 130, 30, al);
+		openSetButton.setText("Abrir set");
 		add(openSetButton);
 		saveSetButton = new ReperButton(605, 550, 130, 30, al);
+		saveSetButton.setText("Salvar Set");
 		add(saveSetButton);
 		removeSetButton = new ReperButton(735, 550, 130, 30, al);
+		removeSetButton.setText("Remover set");
 		add(removeSetButton);
 		reorderUpButton = new ReperButton(865, 125, 30, 200, al);
+		reorderUpButton.setMargin(new Insets(0, 0, 0, 0));
+		reorderUpButton.setText("^");
 		add(reorderUpButton);
 		reorderDownButton = new ReperButton(865, 325, 30, 200, al);
+		reorderDownButton.setMargin(new Insets(0, 0, 0, 0));
+		reorderDownButton.setText("v");
 		add(reorderDownButton);
-		exportButton = new ReperButton(820, 30, 50, 30, al);
+		exportButton = new ReperButton(800, 30, 70, 30, al);
+		exportButton.setMargin(new Insets(0, 0, 0, 0));
+		exportButton.setText("Exportar");
 		add(exportButton);
 		
 		// Connection Label
@@ -93,16 +110,16 @@ public class MasterPanel extends JPanel{
 		connectionLabel.setText(null);
 		connectionLabel.setBackground(Color.green);
 		connectionLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-		connectionLabel.setBounds(100, 30, 50, 30);
+		connectionLabel.setBounds(120, 30, 70, 30);
 		connectionLabel.setOpaque(true);
 		add(connectionLabel);
 						
 		// Message display label
 		messageLabel = new JLabel("Welcome!");
-		messageLabel.setForeground(Color.black);
+		messageLabel.setForeground(Color.white);
 		messageLabel.setHorizontalAlignment(JLabel.CENTER);
-		messageLabel.setBackground(Color.gray);
-		messageLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+		messageLabel.setBackground(Color.black);
+		messageLabel.setBorder(BorderFactory.createLineBorder(Color.white));
 		messageLabel.setBounds(325, 30, 250, 50);
 		messageLabel.setOpaque(true);
 		add(messageLabel);

@@ -109,10 +109,10 @@ public class SetPanel extends JPanel{
 			songPanel.idLabel.setText(String.valueOf(songPanel.getIdx()));
 			i++;
 			if(songPanel.isSelected) {
-				songPanel.setBackground(Color.green);
+				songPanel.setBackground(Color.decode("#b7f79a"));
 			}
 			else {
-				songPanel.setBackground(Color.pink);
+				songPanel.setBackground(Color.decode("#d9dbec"));
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,7 +26,7 @@ public class SongPanel extends JPanel implements ActionListener{
 
 	// Components
 	JLabel idLabel, nameLabel, artistLabel, toneLabel, lengthLabel;
-	ReperButton addButton, removeButton, reorderButton;
+	ReperButton addButton, removeButton, selectButton;
 	
 	SongPanel(String function, MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
@@ -33,7 +34,7 @@ public class SongPanel extends JPanel implements ActionListener{
 		//setMaximumSize(new Dimension(WIDTH, HEIGHT));
 		setSize(new Dimension(WIDTH, HEIGHT));
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(Color.pink);
+		setBackground(Color.decode("#d9dbec"));
 		setLayout(null);
 		
 		addComponents(function);
@@ -77,16 +78,20 @@ public class SongPanel extends JPanel implements ActionListener{
 		
 		if(function.equals("add")) {
 			addButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
-			addButton.setBackground(Color.green);
+			addButton.setMargin(new Insets(0, 0, 0, 0));
+			addButton.setText("+");
+			addButton.setBackground(Color.decode("#7eff7d"));
 			addButton.setOpaque(true);
 			addButton.addActionListener(this);
 			add(addButton);
 		}else if(function.equals("remove")) {
-			reorderButton = new ReperButton(30, 0, 30, 45, masterPanel.al);
-			reorderButton.addActionListener(this);
-			add(reorderButton);
+			selectButton = new ReperButton(30, 0, 30, 45, masterPanel.al);
+			selectButton.addActionListener(this);
+			add(selectButton);
 			removeButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
-			removeButton.setBackground(Color.red);
+			removeButton.setMargin(new Insets(0, 0, 0, 0));
+			removeButton.setText("-");
+			removeButton.setBackground(Color.decode("#ff7065"));
 			removeButton.setOpaque(true);
 			removeButton.addActionListener(this);
 			add(removeButton);
@@ -104,7 +109,6 @@ public class SongPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addButton) {
-			//setBackground(Color.gray);
 			SongPanel song = new SongPanel("remove", masterPanel);
 			song.setId(this.getId());
 			song.setName(this.getName());
@@ -123,11 +127,15 @@ public class SongPanel extends JPanel implements ActionListener{
 			masterPanel.setPanel.updateSongs();
 			masterPanel.reperPanel.fillScrollPanel();
 		}
-		if(e.getSource() == reorderButton) {
-			setBackground(Color.green);
-			masterPanel.setPanel.unselectAll();
-			isSelected = true;
-			masterPanel.setPanel.checkIndexAndSelection();
+		if(e.getSource() == selectButton) {
+			if(isSelected) {
+				masterPanel.setPanel.unselectAll();
+				setBackground(Color.decode("#d9dbec"));
+			}else {
+				masterPanel.setPanel.unselectAll();
+				isSelected = true;
+				masterPanel.setPanel.checkIndexAndSelection();
+			}
 		}
 		
 	}

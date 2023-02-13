@@ -19,7 +19,7 @@ public class ReperActionListener implements ActionListener{
 		// Master Panel buttons
 		if (e.getSource() == masterPanel.dbConnectionButton) {
 			System.out.println("db connection");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.connectionPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
@@ -27,38 +27,38 @@ public class ReperActionListener implements ActionListener{
 			System.out.println("refresh");
 			masterPanel.reperPanel.fillScrollPanel();
 			masterPanel.setPanel.updateSongs();
-			masterPanel.messageLabel.setForeground(Color.black);
+			masterPanel.messageLabel.setForeground(Color.white);
 			masterPanel.messageLabel.setText("Lista atualizada!");
 		}
 		if (e.getSource() == masterPanel.addSongButton) {
 			System.out.println("add song");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.addSongPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.editSongButton) {
 			System.out.println("edit song");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.editSongPanel.setVisible(true);
 			masterPanel.disableComponents();
 			
 		}
 		if (e.getSource() == masterPanel.removeSongButton) {
 			System.out.println("remove song");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.removeSongPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.openSetButton) {
 			System.out.println("open set");
 			masterPanel.openSetPanel.fillComboBox();
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.openSetPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.saveSetButton) {
 			System.out.println("save set");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.saveSetPanel.setVisible(true);
 			masterPanel.disableComponents();
 			
@@ -66,13 +66,13 @@ public class ReperActionListener implements ActionListener{
 		if(e.getSource() == masterPanel.removeSetButton) {
 			System.out.println("remove set");
 			masterPanel.removeSetPanel.fillComboBox();
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.removeSetPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
 		if (e.getSource() == masterPanel.exportButton) {
 			System.out.println("export");
-			masterPanel.setBackground(Color.decode("#8c222d"));
+			masterPanel.setBackground(Color.decode("#595959"));
 			masterPanel.exportSetPanel.setVisible(true);
 			masterPanel.disableComponents();
 		}
@@ -141,7 +141,7 @@ public class ReperActionListener implements ActionListener{
 		// ConnectionPanel buttons
 		if(e.getSource() == masterPanel.connectionPanel.closeButton) {
 			System.out.println("cancel button");
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.connectionPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -163,7 +163,7 @@ public class ReperActionListener implements ActionListener{
 		}
 		if(e.getSource() == masterPanel.addSongPanel.closeButton) {
 			System.out.println("cancel button");
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.addSongPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -176,7 +176,7 @@ public class ReperActionListener implements ActionListener{
 		}
 		if(e.getSource() == masterPanel.editSongPanel.closeButton) {
 			System.out.println("cancel button");
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.editSongPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -189,7 +189,7 @@ public class ReperActionListener implements ActionListener{
 		}
 		if(e.getSource() == masterPanel.removeSongPanel.closeButton) {
 			System.out.println("cancel button");
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.removeSongPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -201,7 +201,7 @@ public class ReperActionListener implements ActionListener{
 				masterPanel.messageLabel.setText("Erro! Contém espaços");
 			}else {
 				masterPanel.setPanel.saveSet();
-				masterPanel.setBackground(Color.decode("#b02c3a"));
+				masterPanel.setBackground(Color.gray);
 				masterPanel.saveSetPanel.setVisible(false);
 				masterPanel.enableComponents();
 				masterPanel.messageLabel.setForeground(Color.green);
@@ -210,7 +210,7 @@ public class ReperActionListener implements ActionListener{
 			
 		}
 		if(e.getSource() == masterPanel.saveSetPanel.closeButton) {
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.saveSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -218,7 +218,7 @@ public class ReperActionListener implements ActionListener{
 		// OpenSetPanel buttons
 		if(e.getSource() == masterPanel.openSetPanel.openButton) {
 			masterPanel.setPanel.openSet();
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.openSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 			masterPanel.messageLabel.setForeground(Color.green);
@@ -226,7 +226,7 @@ public class ReperActionListener implements ActionListener{
 			
 		}
 		if(e.getSource() == masterPanel.openSetPanel.closeButton) {
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.openSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -234,14 +234,14 @@ public class ReperActionListener implements ActionListener{
 		// RemoveSetPanel buttons
 		if(e.getSource() == masterPanel.removeSetPanel.removeButton) {
 			masterPanel.jdbc.dropTable(masterPanel.removeSetPanel.comboBox.getSelectedItem().toString());
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.removeSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 			masterPanel.messageLabel.setForeground(Color.green);
 			masterPanel.messageLabel.setText("Excluído com sucesso!");
 		}
 		if(e.getSource() == masterPanel.removeSetPanel.closeButton) {
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.removeSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}
@@ -249,14 +249,14 @@ public class ReperActionListener implements ActionListener{
 		// ExportSetPanel buttons
 		if(e.getSource() == masterPanel.exportSetPanel.exportButton) {
 			masterPanel.setPanel.exportSet(masterPanel.exportSetPanel.nameTextField.getText());
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.exportSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 			masterPanel.messageLabel.setForeground(Color.green);
 			masterPanel.messageLabel.setText("Exportado com sucesso!");
 		}
 		if(e.getSource() == masterPanel.exportSetPanel.closeButton) {
-			masterPanel.setBackground(Color.decode("#b02c3a"));
+			masterPanel.setBackground(Color.gray);
 			masterPanel.exportSetPanel.setVisible(false);
 			masterPanel.enableComponents();
 		}

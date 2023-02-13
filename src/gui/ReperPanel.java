@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -139,16 +140,26 @@ public class ReperPanel extends JPanel{
 		
 		// Buttons
 		addAllButton = new ReperButton(0, 0, 32, 25, masterPanel.al);
+		addAllButton.setMargin(new Insets(0, 0, 0, 0));
+		addAllButton.setText("+");
 		add(addAllButton);
 		orderByIdButton = new ReperButton(31, 0, 30, 25, masterPanel.al);
+		orderByIdButton.setMargin(new Insets(0, 0, 0, 0));
+		orderByIdButton.setText("ID");
 		add(orderByIdButton);
 		orderByNameButton = new ReperButton(61, 0, 120, 25, masterPanel.al);
+		orderByNameButton.setText("Nome");
 		add(orderByNameButton);
 		orderByArtistButton = new ReperButton(181, 0, 100, 25, masterPanel.al);
+		orderByArtistButton.setText("Artista");
 		add(orderByArtistButton);
 		orderByToneButton = new ReperButton(281, 0, 30, 25, masterPanel.al);
+		orderByToneButton.setMargin(new Insets(0, 0, 0, 0));
+		orderByToneButton.setText("T");
 		add(orderByToneButton);
-		orderByLengthButton = new ReperButton(311, 0, 90, 25, masterPanel.al);
+		orderByLengthButton = new ReperButton(311, 0, 80, 25, masterPanel.al);
+		orderByLengthButton.setMargin(new Insets(0, 0, 0, 0));
+		orderByLengthButton.setText("Duração (s)");
 		add(orderByLengthButton);
 	}
 		
