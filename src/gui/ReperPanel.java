@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -57,9 +58,15 @@ public class ReperPanel extends JPanel{
 					songPanel.updateData();
 					songPanels.add(songPanel);
 				}
-				for(SongPanel s : songPanels) {
-					scrollPanel.add(s);
+				for(SongPanel songPanel : songPanels) {
+					if(masterPanel.setPanel.songPanels
+							.stream().map(SongPanel::getName).collect(Collectors.toList())
+							.contains(songPanel.getName())) {
+						songPanel.setBackground(Color.gray);
+					}
+					scrollPanel.add(songPanel);
 				}
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 				masterPanel.messageLabel.setForeground(Color.red);
@@ -69,6 +76,53 @@ public class ReperPanel extends JPanel{
 		
 	}
 	
+	public void fillScrollPanel(String orderBy) {
+		if(masterPanel.jdbc.getCon() != null) {
+			try {
+				songPanels.clear();
+				scrollPanel.removeAll();
+				scrollPanel.revalidate();
+				scrollPanel.repaint();
+				ArrayList<Song> songs;
+				songs = masterPanel.jdbc.getAllSongs(orderBy);
+				
+				for(Song song : songs) {
+					SongPanel songPanel = new SongPanel("add", masterPanel);
+					songPanel.setId(song.getId());
+					songPanel.setName(song.getName());
+					songPanel.setArtist(song.getArtist());
+					songPanel.setTone(song.getTone());
+					songPanel.setLength(song.getLength());
+					songPanel.updateData();
+					songPanels.add(songPanel);
+				}
+				for(SongPanel songPanel : songPanels) {
+					if(masterPanel.setPanel.songPanels
+							.stream().map(SongPanel::getName).collect(Collectors.toList())
+							.contains(songPanel.getName())) {
+						songPanel.setBackground(Color.gray);
+					}
+					scrollPanel.add(songPanel);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				masterPanel.messageLabel.setForeground(Color.red);
+				masterPanel.messageLabel.setText("Erro ao obter músicas");
+			}
+		}
+		
+	}
+	
+	public void checkSelected() {
+		for(SongPanel songPanel : songPanels) {
+			if(masterPanel.setPanel.songPanels
+					.stream().map(SongPanel::getName).collect(Collectors.toList())
+					.contains(songPanel.getName())) {
+				songPanel.setBackground(Color.gray);
+			}
+		}
+	}
 	
 	public void addComponents() {
 		scrollPanel = new JPanel();
@@ -78,6 +132,8 @@ public class ReperPanel extends JPanel{
 		scrollPanel.setLayout(new GridLayout(10, 0));
 
 		scrollPane = new JScrollPane(scrollPanel);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 25, WIDTH, HEIGHT-25);
 		add(scrollPane);
 		
@@ -88,12 +144,12 @@ public class ReperPanel extends JPanel{
 		add(orderByIdButton);
 		orderByNameButton = new ReperButton(61, 0, 120, 25, masterPanel.al);
 		add(orderByNameButton);
-		orderByNameButton = new ReperButton(181, 0, 100, 25, masterPanel.al);
-		add(orderByNameButton);
-		orderByNameButton = new ReperButton(281, 0, 30, 25, masterPanel.al);
-		add(orderByNameButton);
-		orderByNameButton = new ReperButton(311, 0, 90, 25, masterPanel.al);
-		add(orderByNameButton);
+		orderByArtistButton = new ReperButton(181, 0, 100, 25, masterPanel.al);
+		add(orderByArtistButton);
+		orderByToneButton = new ReperButton(281, 0, 30, 25, masterPanel.al);
+		add(orderByToneButton);
+		orderByLengthButton = new ReperButton(311, 0, 90, 25, masterPanel.al);
+		add(orderByLengthButton);
 	}
 		
 }

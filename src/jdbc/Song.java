@@ -7,6 +7,7 @@ public class Song {
 	private String artist;
 	private String tone;
 	private int length;
+	private int idx;
 	
 	public Song() {}
 	
@@ -57,6 +58,14 @@ public class Song {
 
 	public void setLength(int length) {
 		this.length = length;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int index) {
+		this.idx = index;
 	}
 	
 }

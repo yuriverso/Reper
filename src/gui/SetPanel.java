@@ -3,10 +3,15 @@ package gui;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import jdbc.Song;
 
 public class SetPanel extends JPanel{
 
@@ -15,8 +20,10 @@ public class SetPanel extends JPanel{
 	MasterPanel masterPanel;
 	JScrollPane scrollPane;
 	JPanel scrollPanel;
+	GridLayout gridLayout;
 	
 	ArrayList<SongPanel> songPanels;
+	
 	
 	SetPanel(MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
@@ -30,8 +37,59 @@ public class SetPanel extends JPanel{
 		addComponents();
 	}
 	
+	public void saveSet() {
+		ArrayList<Song> songs = new ArrayList<Song>();
+		
+		for(SongPanel songPanel : songPanels) {
+			int id = songPanel.getId();
+			String name = songPanel.getName();
+			String artist = songPanel.getArtist();
+			String tone = songPanel.getTone();
+			int length = songPanel.getLength();
+			Song song = new Song(id, name, artist, tone, length);
+			songs.add(song);
+		}
+		masterPanel.jdbc.createTable(masterPanel.saveSetPanel.nameTextField.getText(), songs);
+	}
+	
+	public void openSet() {
+		if(masterPanel.jdbc.getCon() != null) {
+			try {
+				songPanels.clear();
+				scrollPanel.removeAll();
+				scrollPanel.revalidate();
+				scrollPanel.repaint();
+				ArrayList<Song> songs;
+				songs = masterPanel.jdbc.getSetSongs(masterPanel.openSetPanel.comboBox.getSelectedItem().toString());
+				
+				for(Song song : songs) {
+					SongPanel songPanel = new SongPanel("remove", masterPanel);
+					songPanel.setId(song.getId());
+					songPanel.setName(song.getName());
+					songPanel.setArtist(song.getArtist());
+					songPanel.setTone(song.getTone());
+					songPanel.setLength(song.getLength());
+					songPanel.updateData();
+					songPanels.add(songPanel);
+				}
+				for(SongPanel songPanel : songPanels) {
+					scrollPanel.add(songPanel);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				masterPanel.messageLabel.setForeground(Color.red);
+				masterPanel.messageLabel.setText("Erro ao obter músicas");
+			}
+		}
+	}
+	
 	public void addSong(SongPanel song) {
+		
 		songPanels.add(song);
+		if(songPanels.size() < 10) gridLayout = new GridLayout(songPanels.size()+(10-songPanels.size()), 0);
+		else gridLayout = new GridLayout(songPanels.size(), 0);
+		scrollPanel.setLayout(gridLayout);
 	}
 	
 	public void updateSongs() {
@@ -41,17 +99,56 @@ public class SetPanel extends JPanel{
 		for(SongPanel s : songPanels) {
 			scrollPanel.add(s);
 		}
+		checkIndexAndSelection();
+	}
+	
+	public void checkIndexAndSelection() {
+		int i = 1;
+		for(SongPanel songPanel : songPanels) {
+			songPanel.setIdx(i);
+			songPanel.idLabel.setText(String.valueOf(songPanel.getIdx()));
+			i++;
+			if(songPanel.isSelected) {
+				songPanel.setBackground(Color.green);
+			}
+			else {
+				songPanel.setBackground(Color.pink);
+			}
+		}
+	}
+	
+	public void unselectAll() {
+		for(SongPanel songPanel : songPanels) {
+			songPanel.isSelected = false;
+		}
 	}
 	
 	public void addComponents() {
+		gridLayout = new GridLayout(songPanels.size()+10, 0);
+		
 		scrollPanel = new JPanel();
 		scrollPanel.setBackground(Color.white);
 		scrollPanel.setVisible(true);
-		scrollPanel.setLayout(new GridLayout(10, 0));
+		scrollPanel.setLayout(gridLayout);
 
 		scrollPane = new JScrollPane(scrollPanel);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0, WIDTH, HEIGHT);
 		add(scrollPane);
+	}
+	
+	public void exportSet(String setName) {
+		try{
+			FileWriter writer = new FileWriter("exported/"+setName+".txt");
+			for(SongPanel songPanel : songPanels) {
+				writer.append(songPanel.getName()+"\n");
+			}
+			writer.close();
+			}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 }

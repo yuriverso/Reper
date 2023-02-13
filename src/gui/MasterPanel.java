@@ -26,6 +26,10 @@ public class MasterPanel extends JPanel{
 	AddSongPanel addSongPanel;
 	EditSongPanel editSongPanel;
 	RemoveSongPanel removeSongPanel;
+	SaveSetPanel saveSetPanel;
+	OpenSetPanel openSetPanel;
+	RemoveSetPanel removeSetPanel;
+	ExportSetPanel exportSetPanel;
 	
 	// Components
 	ReperActionListener al = new ReperActionListener(this);
@@ -33,8 +37,8 @@ public class MasterPanel extends JPanel{
 	SetPanel setPanel;
 	public JLabel connectionLabel, messageLabel;
 	ReperButton dbConnectionButton, refreshButton, addSongButton, editSongButton, 
-				removeSongButton, openSetButton, saveSetButton, exportButton, 
-				reorderUpButton, reorderDownButton;
+				removeSongButton, openSetButton, saveSetButton, removeSetButton, 
+				reorderUpButton, reorderDownButton, exportButton;
 	
 	
 	public MasterPanel(){
@@ -55,6 +59,10 @@ public class MasterPanel extends JPanel{
 		addSongPanel = new AddSongPanel(this);
 		editSongPanel = new EditSongPanel(this);
 		removeSongPanel = new RemoveSongPanel(this);
+		saveSetPanel = new SaveSetPanel(this);
+		openSetPanel = new OpenSetPanel(this);
+		removeSetPanel = new RemoveSetPanel(this);
+		exportSetPanel = new ExportSetPanel(this);
 		
 		// Buttons
 		dbConnectionButton = new ReperButton(30, 30, 50, 30, al);
@@ -71,12 +79,14 @@ public class MasterPanel extends JPanel{
 		add(openSetButton);
 		saveSetButton = new ReperButton(605, 550, 130, 30, al);
 		add(saveSetButton);
-		exportButton = new ReperButton(735, 550, 130, 30, al);
-		add(exportButton);
+		removeSetButton = new ReperButton(735, 550, 130, 30, al);
+		add(removeSetButton);
 		reorderUpButton = new ReperButton(865, 125, 30, 200, al);
 		add(reorderUpButton);
 		reorderDownButton = new ReperButton(865, 325, 30, 200, al);
 		add(reorderDownButton);
+		exportButton = new ReperButton(820, 30, 50, 30, al);
+		add(exportButton);
 		
 		// Connection Label
 		connectionLabel = new JLabel();
@@ -98,11 +108,13 @@ public class MasterPanel extends JPanel{
 		add(messageLabel);
 		
 		// Panels
-		reperPanel = new ReperPanel(this);
 		setPanel = new SetPanel(this);
+		reperPanel = new ReperPanel(this);
+		
 		//
-		add(reperPanel);
 		add(setPanel);
+		add(reperPanel);
+		
 
 		setReturnComponents(reperConnection.getUrl(), reperConnection.getUser(), reperConnection.getPass());
 	}

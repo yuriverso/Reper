@@ -18,17 +18,20 @@ public class SongPanel extends JPanel implements ActionListener{
 	MasterPanel masterPanel;
 	
 	// Attributes
-	private int id;
+	private int id, idx;
 	private String name, artist, tone;
 	private int length;
+	public boolean isSelected = false;
 
 	// Components
 	JLabel idLabel, nameLabel, artistLabel, toneLabel, lengthLabel;
-	ReperButton addButton, removeButton;
+	ReperButton addButton, removeButton, reorderButton;
 	
 	SongPanel(String function, MasterPanel masterPanel){
 		this.masterPanel = masterPanel;
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		//setMaximumSize(new Dimension(WIDTH, HEIGHT));
+		setSize(new Dimension(WIDTH, HEIGHT));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(Color.pink);
 		setLayout(null);
@@ -37,21 +40,8 @@ public class SongPanel extends JPanel implements ActionListener{
 	}
 	
 	public void addComponents(String function) {
-		if(function.equals("add")) {
-			addButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
-			addButton.setBackground(Color.green);
-			addButton.setOpaque(true);
-			addButton.addActionListener(this);
-			add(addButton);
-		}else if(function.equals("remove")) {
-			removeButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
-			removeButton.setBackground(Color.red);
-			removeButton.setOpaque(true);
-			removeButton.addActionListener(this);
-			add(removeButton);
-		}
+		
 		idLabel = new JLabel();
-		idLabel.setText(String.valueOf(id));
 		idLabel.setHorizontalAlignment(JLabel.CENTER);
 		idLabel.setBounds(30, 0, 30, 45);
 		idLabel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -84,6 +74,23 @@ public class SongPanel extends JPanel implements ActionListener{
 		lengthLabel.setBounds(310, 0, 65, 45);
 		lengthLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(lengthLabel);
+		
+		if(function.equals("add")) {
+			addButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
+			addButton.setBackground(Color.green);
+			addButton.setOpaque(true);
+			addButton.addActionListener(this);
+			add(addButton);
+		}else if(function.equals("remove")) {
+			reorderButton = new ReperButton(30, 0, 30, 45, masterPanel.al);
+			reorderButton.addActionListener(this);
+			add(reorderButton);
+			removeButton = new ReperButton(5, 5, 20, 30, masterPanel.al);
+			removeButton.setBackground(Color.red);
+			removeButton.setOpaque(true);
+			removeButton.addActionListener(this);
+			add(removeButton);
+		}
 	}
 	
 	public void updateData() {
@@ -97,15 +104,30 @@ public class SongPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addButton) {
-			setBackground(Color.gray);
+			//setBackground(Color.gray);
 			SongPanel song = new SongPanel("remove", masterPanel);
+			song.setId(this.getId());
+			song.setName(this.getName());
+			song.setArtist(this.getArtist());
+			song.setTone(this.getTone());
+			song.setLength(this.getLength());
+			song.setIdx(masterPanel.setPanel.songPanels.size()+1);
+			song.updateData();
 
 			masterPanel.setPanel.addSong(song);
 			masterPanel.setPanel.updateSongs();
+			masterPanel.reperPanel.checkSelected();
 		}
 		if(e.getSource() == removeButton) {
 			masterPanel.setPanel.songPanels.remove(this);
 			masterPanel.setPanel.updateSongs();
+			masterPanel.reperPanel.fillScrollPanel();
+		}
+		if(e.getSource() == reorderButton) {
+			setBackground(Color.green);
+			masterPanel.setPanel.unselectAll();
+			isSelected = true;
+			masterPanel.setPanel.checkIndexAndSelection();
 		}
 		
 	}
@@ -148,6 +170,14 @@ public class SongPanel extends JPanel implements ActionListener{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 }

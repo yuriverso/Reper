@@ -1,5 +1,9 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import gui.MasterPanel;
@@ -14,9 +18,11 @@ public class Reper {
 		MasterPanel masterPanel = new MasterPanel();
 		frame.add(masterPanel);
 		
+		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
 		
 	}
 		
