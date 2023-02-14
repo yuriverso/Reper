@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
@@ -152,7 +151,6 @@ public class ReperActionListener implements ActionListener{
 			String user = masterPanel.connectionPanel.userTextField.getText();
 			String pass = masterPanel.connectionPanel.passTextField.getText();
 			masterPanel.newConnection(url, user, pass);
-			
 		}
 		
 		// AddSongPanel buttons

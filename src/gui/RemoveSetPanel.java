@@ -7,7 +7,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class RemoveSetPanel extends JPanel{
 	MasterPanel masterPanel;

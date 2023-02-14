@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -12,7 +11,6 @@ import javax.swing.JPanel;
 
 import jdbc.ReperConnection;
 import jdbc.ReperJDBC;
-import jdbc.Song;
 
 public class MasterPanel extends JPanel{
 	
@@ -36,7 +34,7 @@ public class MasterPanel extends JPanel{
 	ReperActionListener al = new ReperActionListener(this);
 	ReperPanel reperPanel;
 	SetPanel setPanel;
-	public JLabel connectionLabel, messageLabel;
+	public JLabel connectionLabel, messageLabel, reperLabel, setLabel;
 	ReperButton dbConnectionButton, refreshButton, addSongButton, editSongButton, 
 				removeSongButton, openSetButton, saveSetButton, removeSetButton, 
 				reorderUpButton, reorderDownButton, exportButton;
@@ -124,15 +122,27 @@ public class MasterPanel extends JPanel{
 		messageLabel.setOpaque(true);
 		add(messageLabel);
 		
+		// Other Labels
+		reperLabel = new JLabel("Todas as Músicas");
+		reperLabel.setForeground(Color.black);
+		reperLabel.setHorizontalAlignment(JLabel.CENTER);
+		reperLabel.setBounds(130, 70, 180, 30);
+		reperLabel.setOpaque(true);
+		add(reperLabel);
+		
+		setLabel = new JLabel("Novo Set");
+		setLabel.setForeground(Color.black);
+		setLabel.setHorizontalAlignment(JLabel.CENTER);
+		setLabel.setBounds(590, 70, 180, 30);
+		setLabel.setOpaque(true);
+		add(setLabel);
+		
 		// Panels
 		setPanel = new SetPanel(this);
 		reperPanel = new ReperPanel(this);
-		
-		//
 		add(setPanel);
 		add(reperPanel);
 		
-
 		setReturnComponents(reperConnection.getUrl(), reperConnection.getUser(), reperConnection.getPass());
 	}
 	

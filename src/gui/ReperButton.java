@@ -14,6 +14,5 @@ public class ReperButton extends JButton{
 		setOpaque(false);
 		addActionListener(a);
 	}
-	//load image passando caminho no construtor
-	//metodo para load e metodo para setar como icon
+
 }

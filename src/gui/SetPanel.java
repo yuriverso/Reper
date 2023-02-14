@@ -1,12 +1,10 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +48,7 @@ public class SetPanel extends JPanel{
 			songs.add(song);
 		}
 		masterPanel.jdbc.createTable(masterPanel.saveSetPanel.nameTextField.getText(), songs);
+		masterPanel.setLabel.setText(masterPanel.saveSetPanel.nameTextField.getText());
 	}
 	
 	public void openSet() {
@@ -75,6 +74,7 @@ public class SetPanel extends JPanel{
 				for(SongPanel songPanel : songPanels) {
 					scrollPanel.add(songPanel);
 				}
+				masterPanel.setLabel.setText(masterPanel.openSetPanel.comboBox.getSelectedItem().toString());
 				
 			}catch(Exception e) {
 				e.printStackTrace();

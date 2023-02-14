@@ -1,15 +1,11 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -23,6 +19,7 @@ public class ReperPanel extends JPanel{
 	ReperButton addAllButton, orderByIdButton, orderByNameButton, orderByArtistButton, orderByToneButton, orderByLengthButton;
 	JScrollPane scrollPane;
 	JPanel scrollPanel;
+	GridLayout gridLayout;
 	
 	ArrayList<SongPanel> songPanels;
 	
@@ -59,6 +56,10 @@ public class ReperPanel extends JPanel{
 					songPanel.updateData();
 					songPanels.add(songPanel);
 				}
+				
+				gridLayout = new GridLayout(songPanels.size(), 0);
+				scrollPanel.setLayout(gridLayout);
+				
 				for(SongPanel songPanel : songPanels) {
 					if(masterPanel.setPanel.songPanels
 							.stream().map(SongPanel::getName).collect(Collectors.toList())
@@ -74,7 +75,6 @@ public class ReperPanel extends JPanel{
 				masterPanel.messageLabel.setText("Erro ao obter músicas");
 			}
 		}
-		
 	}
 	
 	public void fillScrollPanel(String orderBy) {
@@ -97,6 +97,8 @@ public class ReperPanel extends JPanel{
 					songPanel.updateData();
 					songPanels.add(songPanel);
 				}
+				
+				
 				for(SongPanel songPanel : songPanels) {
 					if(masterPanel.setPanel.songPanels
 							.stream().map(SongPanel::getName).collect(Collectors.toList())
@@ -112,7 +114,6 @@ public class ReperPanel extends JPanel{
 				masterPanel.messageLabel.setText("Erro ao obter músicas");
 			}
 		}
-		
 	}
 	
 	public void checkSelected() {
@@ -126,11 +127,10 @@ public class ReperPanel extends JPanel{
 	}
 	
 	public void addComponents() {
+		
 		scrollPanel = new JPanel();
-		//scrollPanel.setBounds(0, 25, WIDTH, HEIGHT-25);
 		scrollPanel.setBackground(Color.white);
 		scrollPanel.setVisible(true);
-		scrollPanel.setLayout(new GridLayout(10, 0));
 
 		scrollPane = new JScrollPane(scrollPanel);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
