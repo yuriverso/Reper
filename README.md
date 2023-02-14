@@ -9,7 +9,7 @@ Este projeto foi construído em Java com integração a um banco de dados MySQL.
 
 ## O projeto
 
-  O código possui duas partes principais: a GUI (Interface Gráfica do Usuário) e a JDBC (Conectividade Java à Base de Dados). A primeira serve como ferramenta para a utilização da segunda. 
+  O código possui duas partes principais que atuam concomitantemente: a GUI (Interface Gráfica do Usuário) e a JDBC (Conectividade Java à Base de Dados).
   
   A princípio, a base de dados estará vazia, ou seja, nenhuma música terá sido registrada. Portanto, o usuário deverá registrá-las através da função "Adicionar Música", inserindo o nome, o artista, o tom e a duração da mesma. <br>
 (É possível também editar músicas já registradas ou removê-las da base da dados)
@@ -31,6 +31,7 @@ Para que o programa funcione como esperado, é preciso ter uma conexão ativa co
 ![imagemconect2](https://user-images.githubusercontent.com/96660042/218760929-ba41a602-8633-4fb6-916c-2a5719147cc8.png)
 
 Caso a conexão seja realizada com sucesso, o indicador de conexão ficará verde, caso contrário, vermelho.
+<hr>
 
 ![imagem3](https://user-images.githubusercontent.com/96660042/218761475-3ac3d048-fdaf-4257-8fe6-bfa85f34e055.png)
 
