@@ -137,11 +137,11 @@ public class MasterPanel extends JPanel{
 		setLabel.setOpaque(true);
 		add(setLabel);
 		
-		timeCountLabel = new JLabel("1000");
+		timeCountLabel = new JLabel("0");
 		timeCountLabel.setForeground(Color.black);
 		timeCountLabel.setBackground(Color.pink);
 		timeCountLabel.setHorizontalAlignment(JLabel.CENTER);
-		timeCountLabel.setBounds(770, 70, 100, 30);
+		timeCountLabel.setBounds(770, 70, 95, 30);
 		timeCountLabel.setOpaque(true);
 		add(timeCountLabel);
 		
