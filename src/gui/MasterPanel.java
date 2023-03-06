@@ -34,7 +34,7 @@ public class MasterPanel extends JPanel{
 	ReperActionListener al = new ReperActionListener(this);
 	ReperPanel reperPanel;
 	SetPanel setPanel;
-	public JLabel connectionLabel, messageLabel, reperLabel, setLabel;
+	public JLabel connectionLabel, messageLabel, reperLabel, setLabel, timeCountLabel;
 	ReperButton dbConnectionButton, refreshButton, addSongButton, editSongButton, 
 				removeSongButton, openSetButton, saveSetButton, removeSetButton, 
 				reorderUpButton, reorderDownButton, exportButton;
@@ -136,6 +136,14 @@ public class MasterPanel extends JPanel{
 		setLabel.setBounds(590, 70, 180, 30);
 		setLabel.setOpaque(true);
 		add(setLabel);
+		
+		timeCountLabel = new JLabel("1000");
+		timeCountLabel.setForeground(Color.black);
+		timeCountLabel.setBackground(Color.pink);
+		timeCountLabel.setHorizontalAlignment(JLabel.CENTER);
+		timeCountLabel.setBounds(770, 70, 100, 30);
+		timeCountLabel.setOpaque(true);
+		add(timeCountLabel);
 		
 		// Panels
 		setPanel = new SetPanel(this);

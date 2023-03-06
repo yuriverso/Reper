@@ -115,7 +115,7 @@ public class SongPanel extends JPanel implements ActionListener{
 			song.setLength(this.getLength());
 			song.setIdx(masterPanel.setPanel.songPanels.size()+1);
 			song.updateData();
-
+			
 			masterPanel.setPanel.addSong(song);
 			masterPanel.setPanel.updateSongs();
 			masterPanel.reperPanel.checkSelected();

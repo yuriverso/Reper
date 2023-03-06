@@ -96,9 +96,14 @@ public class SetPanel extends JPanel{
 		scrollPanel.removeAll();
 		scrollPanel.revalidate();
 		scrollPanel.repaint();
+		
+		int totalLength = 0;
+		
 		for(SongPanel s : songPanels) {
 			scrollPanel.add(s);
+			totalLength += s.getLength();
 		}
+		masterPanel.timeCountLabel.setText(String.valueOf(totalLength));
 		checkIndexAndSelection();
 	}
 	
