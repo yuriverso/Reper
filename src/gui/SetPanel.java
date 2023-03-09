@@ -1,11 +1,13 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -134,7 +136,8 @@ public class SetPanel extends JPanel{
 		scrollPanel = new JPanel();
 		scrollPanel.setBackground(Color.white);
 		scrollPanel.setVisible(true);
-		scrollPanel.setLayout(gridLayout);
+		scrollPanel.setLayout(new BoxLayout(scrollPanel, BoxLayout.Y_AXIS));
+		//scrollPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
 		scrollPane = new JScrollPane(scrollPanel);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
